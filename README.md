@@ -1,7 +1,7 @@
 superbowlsquare
 ===============
 
-Stand alone page to your superbowl square
+Stand alone page for superbowl square
 
 
 ![Screnshot](./screenshot.png "Screenshot")
