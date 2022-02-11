@@ -127,6 +127,7 @@
             randomEmptyCell.innerText = name;
         }
         document.getElementById("squaresLeft").innerText = getNumSquaresLeft();
+        saveBoard();
     }
 
     function getNumSquaresLeft() {
@@ -140,11 +141,20 @@
 
     function initBoard() {
         let board = document.getElementById("board");
-        for (let row = 1; row<=10; row++) {
-            for(let col=1; col<=10; col++) {
-                board.getElementsByTagName("tr")[row].appendChild(document.createElement('td'));
+        if(window.localStorage.getItem("board")) {
+            board.innerHTML = window.localStorage.getItem("board");
+        } else {
+            for (let row = 1; row <= 10; row++) {
+                for (let col = 1; col <= 10; col++) {
+                    board.getElementsByTagName("tr")[row].appendChild(document.createElement('td'));
+                }
             }
+            saveBoard();
         }
+    }
+
+    function saveBoard() {
+        window.localStorage.setItem("board", document.getElementById("board").innerHTML);
     }
     initBoard();
 
