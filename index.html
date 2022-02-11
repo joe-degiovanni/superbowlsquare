@@ -2,46 +2,44 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Superbowl Square</title>
-        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Superbowl Square</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <style>
-            body {
-                font-size: 40px;
-                font-family: helvetica neue, Helvetica, Arial, sans-serif;
-            }
+    <style>
+        body {
+            font-size: 40px;
+            font-family: helvetica neue, Helvetica, Arial, sans-serif;
+        }
 
-            .container {
-                width: 100%;
-                padding: 25px;
-                padding-left: 150px;
-            }
+        .container {
+            width: 100%;
+            padding: 25px;
+            padding-left: 150px;
+        }
 
-            #sideTitle {
-                transform: rotate(270deg);
-                -ms-transform: rotate(270deg);
-                -webkit-transform: rotate(270deg);
-                position: fixed;
-                top: 50%;
-                color: #35A6DB;
-                text-shadow: 2px 2px black;
-            }
+        #sideTitle {
+            transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            -webkit-transform: rotate(270deg);
+            position: fixed;
+            top: 50%;
+            color: #35A6DB;
+            text-shadow: 2px 2px black;
+        }
 
-            table {
-                width: 100%
-            }
+        table {
+            width: 100%
+        }
 
-            .highlight {
-                background-color: #A6BBD0;
-            }
+        .highlight {
+            background-color: #A6BBD0;
+        }
 
-        </style>
-    </head>
+    </style>
 <body style="" screen_capture_injected="true" quick-markup_injected="true">
 <div id="sideTitle" style="color: #fb4f14"><img src="bengals.png" width="50px"/>engals</div>
 <div class="container">
@@ -94,7 +92,6 @@
                 <th>9</th>
             </tr>
         </table>
-
     </div>
 
     <div class="row">
@@ -104,6 +101,7 @@
                                      placeholder="Number of Squares"></div>
         <div class="col-xs-3">
             <button onclick="buySquares()">Buy</button>
+            <button onclick="clearBoard()">Clear Board</button>
         </div>
     </div>
 </div>
@@ -121,7 +119,7 @@
             return;
         }
 
-        for(let i=0; i< amount; i++) {
+        for (let i = 0; i < amount; i++) {
             let randomEmptyCell = getEmptySquares().sort(() => Math.random() - 0.5)[0];
 
             randomEmptyCell.innerText = name;
@@ -141,7 +139,7 @@
 
     function initBoard() {
         let board = document.getElementById("board");
-        if(window.localStorage.getItem("board")) {
+        if (window.localStorage.getItem("board")) {
             board.innerHTML = window.localStorage.getItem("board");
         } else {
             for (let row = 1; row <= 10; row++) {
@@ -154,8 +152,16 @@
     }
 
     function saveBoard() {
-        window.localStorage.setItem("board", document.getElementById("board").innerHTML);
+        localStorage.setItem("board", document.getElementById("board").innerHTML);
     }
+
+    function clearBoard() {
+        if(confirm("are you sure? this can't be undone")) {
+            localStorage.clear();
+            window.location.reload();
+        }
+    }
+
     initBoard();
 
 </script>
