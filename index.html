@@ -115,16 +115,27 @@
     function buySquares() {
         let name = document.getElementById("name").value;
         let amount = document.getElementById("ammount").valueAsNumber;
-        let board = document.getElementById("board");
+
+        if (getNumSquaresLeft() < amount) {
+            alert(`Unable to buy ${amount} squares. Only ${getNumSquaresLeft()} are remaining!`)
+            return;
+        }
 
         for(let i=0; i< amount; i++) {
-            let randomEmptyCell = Array.from(board.getElementsByTagName("td"))
-                .filter(it => it.innerText == '')
-                .sort(() => Math.random() - 0.5)[0];
+            let randomEmptyCell = getEmptySquares().sort(() => Math.random() - 0.5)[0];
 
             randomEmptyCell.innerText = name;
         }
+        document.getElementById("squaresLeft").innerText = getNumSquaresLeft();
+    }
 
+    function getNumSquaresLeft() {
+        return getEmptySquares().length;
+    }
+
+    function getEmptySquares() {
+        return Array.from(board.getElementsByTagName("td"))
+            .filter(it => it.innerText == '');
     }
 
     function initBoard() {
