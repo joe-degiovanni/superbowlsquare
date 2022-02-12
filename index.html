@@ -115,8 +115,8 @@
         }
 
         for (let i = 0; i < amount; i++) {
-            let randomEmptyCell = getEmptySquares().sort(() => Math.random() - 0.5)[0];
-
+            let emtpyCells = getEmptySquares();
+            let randomEmptyCell = emtpyCells[Math.floor(Math.random() * emtpyCells.length)];
             randomEmptyCell.innerText = name;
         }
         document.getElementById("squaresLeft").innerText = getNumSquaresLeft();
